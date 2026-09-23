@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão de Documentos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Gestão de Documentos</h1>
+  </header>
+
+  <main>
+    <!-- Formulário de upload -->
+    <section class="card">
+      <h2>Novo Documento</h2>
+      <form id="form-upload">
+        <label for="titulo">Título*</label>
+        <input type="text" id="titulo" name="titulo" required />
+
+        <label for="descricao">Descrição (opcional)</label>
+        <textarea id="descricao" name="descricao" rows="2"></textarea>
+
+        <label for="arquivo">Arquivo (PDF, JPG ou PNG)*</label>
+        <input type="file" id="arquivo" name="arquivo" accept=".pdf,.jpg,.jpeg,.png" required />
+
+        <button type="submit">Enviar Documento</button>
+        <p id="msg-upload" class="mensagem"></p>
+      </form>
+    </section>
+
+    <!-- Lista de documentos -->
+    <section class="card">
+      <h2>Documentos Cadastrados</h2>
+      <table id="tabela-documentos">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Data de Upload</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="lista-documentos">
+          <!-- preenchido via JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Modal de comentários -->
+  <div id="modal-comentarios" class="modal oculto">
+    <div class="modal-conteudo">
+      <span id="fechar-modal" class="fechar">&times;</span>
+      <h2 id="modal-titulo-documento">Comentários</h2>
+
+      <div id="lista-comentarios" class="lista-comentarios"></div>
+
+      <form id="form-comentario">
+        <textarea id="texto-comentario" placeholder="Escreva um comentário..." rows="2" required></textarea>
+        <button type="submit">Adicionar Comentário</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
