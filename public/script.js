@@ -36,6 +36,7 @@ async function carregarDocumentos() {
 
       linha.innerHTML = `
         <td>${doc.titulo}</td>
+        <td>${doc.descricao || '-'}</td>
         <td>${dataFormatada}</td>
         <td>
           <a class="acao" href="${API_BASE_URL}${doc.caminho_arquivo}" target="_blank">Ver/Baixar</a>
