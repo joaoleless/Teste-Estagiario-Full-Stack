@@ -73,10 +73,9 @@ Quando terminar de testar separado, lembre de voltar `API_BASE_URL` para `''` (v
 
 ## Observações e limitações conhecidas
 
-- Não há autenticação ou controle de acesso, conforme especificado na prova.
-- Os arquivos são armazenados localmente no servidor (pasta `uploads/`); em ambientes de deploy com sistema de arquivos efêmero, os arquivos podem ser perdidos após reinicializações — recomenda-se usar um provedor com disco persistente (ex.: Render).
-- Formatos de arquivo aceitos: PDF, JPG e PNG.
+- Não há autenticação ou controle de acesso, conforme especificado na documento.
+- Os arquivos são armazenados localmente no servidor (pasta `uploads/`). Depois de algum tempo de inatividade os arquivos podem ser apagados, pois o sistema de deploy não possui o armazenamento persistente.
 
 ## Link do deploy
 
-> Preencher após o deploy: `https://SEU-LINK-AQUI.onrender.com`
+`https://teste-estagiario-full-stack-rmh.onrender.com/`
