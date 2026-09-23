@@ -30,7 +30,9 @@ async function carregarDocumentos() {
 
     documentos.forEach((doc) => {
       const linha = document.createElement('tr');
-      const dataFormatada = new Date(doc.data_upload).toLocaleString('pt-BR');
+      let dataStr = doc.data_upload;
+      if (!dataStr.includes('T')) dataStr = dataStr.replace(' ', 'T') + 'Z';
+      const dataFormatada = new Date(dataStr).toLocaleString('pt-BR');
 
       linha.innerHTML = `
         <td>${doc.titulo}</td>
@@ -136,7 +138,9 @@ async function carregarComentarios(id) {
     comentarios.forEach((c) => {
       const div = document.createElement('div');
       div.className = 'comentario';
-      const dataFormatada = new Date(c.data_hora).toLocaleString('pt-BR');
+      let dataStr = c.data_hora;
+      if (!dataStr.includes('T')) dataStr = dataStr.replace(' ', 'T') + 'Z';
+      const dataFormatada = new Date(dataStr).toLocaleString('pt-BR');
       div.innerHTML = `<span>${c.texto}</span><small>${dataFormatada}</small>`;
       listaComentarios.appendChild(div);
     });

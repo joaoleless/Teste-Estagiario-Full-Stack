@@ -62,14 +62,15 @@ app.post('/documentos', upload.single('arquivo'), (req, res) => {
     }
 
     const stmt = db.prepare(`
-      INSERT INTO documentos (titulo, descricao, nome_arquivo, caminho_arquivo)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO documentos (titulo, descricao, nome_arquivo, caminho_arquivo, data_upload)
+      VALUES (?, ?, ?, ?, ?)
     `);
     const info = stmt.run(
       titulo,
       descricao || '',
       req.file.originalname,
-      `/uploads/${req.file.filename}`
+      `/uploads/${req.file.filename}`,
+      new Date().toISOString()
     );
 
     res.status(201).json({ id: info.lastInsertRowid, mensagem: 'Documento cadastrado com sucesso.' });
@@ -138,10 +139,10 @@ app.post('/documentos/:id/comentarios', (req, res) => {
     if (!documento) return res.status(404).json({ erro: 'Documento nao encontrado.' });
 
     const stmt = db.prepare(`
-      INSERT INTO comentarios (documento_id, texto)
-      VALUES (?, ?)
+      INSERT INTO comentarios (documento_id, texto, data_hora)
+      VALUES (?, ?, ?)
     `);
-    const info = stmt.run(id, texto.trim());
+    const info = stmt.run(id, texto.trim(), new Date().toISOString());
 
     res.status(201).json({ id: info.lastInsertRowid, mensagem: 'Comentario adicionado.' });
   } catch (err) {
