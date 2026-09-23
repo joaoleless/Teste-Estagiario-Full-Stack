@@ -1,6 +1,6 @@
 # Gestão de Documentos
 
-Aplicação web simples para upload de documentos (PDF, JPG ou PNG) com histórico de comentários associados a cada documento. Desenvolvida como parte da prova técnica para a vaga de Estagiário Desenvolvedor Full Stack.
+Aplicação web simples para gerenciar documentos (PDF, JPG ou PNG), permitindo upload e exclusão, além de manter um histórico de comentários associados a cada documento. Desenvolvida como parte da prova técnica para a vaga de Estagiário Desenvolvedor Full Stack.
 
 ## Tecnologias utilizadas
 
@@ -67,6 +67,7 @@ Quando terminar de testar separado, lembre de voltar `API_BASE_URL` para `''` (v
 | POST   | `/documentos`                     | Envia um novo documento                 |
 | GET    | `/documentos`                     | Lista todos os documentos               |
 | GET    | `/documentos/:id`                 | Retorna detalhes de um documento        |
+| DELETE | `/documentos/:id`                 | Exclui um documento, arquivo físico e seus comentários |
 | POST   | `/documentos/:id/comentarios`     | Adiciona um comentário a um documento   |
 | GET    | `/documentos/:id/comentarios`     | Lista os comentários de um documento    |
 

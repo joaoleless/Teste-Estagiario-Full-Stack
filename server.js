@@ -102,6 +102,26 @@ app.get('/documentos/:id', (req, res) => {
   res.json(documento);
 });
 
+// DELETE /documentos/:id -> exclui um documento e o arquivo fisico
+app.delete('/documentos/:id', (req, res) => {
+  try {
+    const documento = db.prepare('SELECT * FROM documentos WHERE id = ?').get(req.params.id);
+    if (!documento) return res.status(404).json({ erro: 'Documento nao encontrado.' });
+
+    db.prepare('DELETE FROM documentos WHERE id = ?').run(req.params.id);
+
+    const filePath = path.join(__dirname, documento.caminho_arquivo);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    res.json({ mensagem: 'Documento excluido com sucesso.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: 'Erro ao excluir documento.' });
+  }
+});
+
 // ---------- ROTAS DE COMENTARIOS ----------
 
 // POST /documentos/:id/comentarios -> adiciona um comentario a um documento

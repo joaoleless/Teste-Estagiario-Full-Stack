@@ -38,6 +38,7 @@ async function carregarDocumentos() {
         <td>
           <a class="acao" href="${API_BASE_URL}${doc.caminho_arquivo}" target="_blank">Ver/Baixar</a>
           <a class="acao" href="#" data-id="${doc.id}" data-titulo="${doc.titulo}">Comentários</a>
+          <a class="acao btn-excluir" href="#" data-excluir-id="${doc.id}" style="color: #ff4d4d; font-weight: bold;">Excluir</a>
         </td>
       `;
 
@@ -49,6 +50,30 @@ async function carregarDocumentos() {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         abrirModalComentarios(link.dataset.id, link.dataset.titulo);
+      });
+    });
+
+    // Liga o clique do botao "Excluir" de cada linha
+    document.querySelectorAll('.btn-excluir').forEach((link) => {
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const id = link.dataset.excluirId;
+        if (confirm('Tem certeza que deseja excluir este documento?')) {
+          try {
+            const resposta = await fetch(`${API_BASE_URL}/documentos/${id}`, {
+              method: 'DELETE'
+            });
+            if (resposta.ok) {
+              carregarDocumentos();
+            } else {
+              const erro = await resposta.json();
+              alert(erro.erro || 'Erro ao excluir documento.');
+            }
+          } catch (erro) {
+            console.error('Erro ao excluir documento:', erro);
+            alert('Erro de conexão ao excluir documento.');
+          }
+        }
       });
     });
   } catch (erro) {
